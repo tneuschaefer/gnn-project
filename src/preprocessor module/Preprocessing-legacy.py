@@ -18,8 +18,11 @@ def preprocess_data(cnt_data, fs, lowcut=0.5, highcut=50.0):
     return cnt_data_filtered
 
 # Path to the main directory containing the folders
-main_directory = r'C:\Users\AaVerma\OneDrive - Heidelberg Materials\Desktop\Raw_\Raw Dataset'
+main_directory = os.getenv('MAIN_DIRECTORY', r'C:\Users\AaVerma\OneDrive - Heidelberg Materials\Desktop\Raw_\Raw Dataset')
 
+# Ensure the main directory environment variable is set
+if not main_directory:
+    raise ValueError("The MAIN_DIRECTORY environment variable is not set.")
 # Create preprocessed dataset folder if it doesn't exist
 preprocessed_dataset_dir = os.path.join(main_directory, 'preprocessed_dataset')
 if not os.path.exists(preprocessed_dataset_dir):
