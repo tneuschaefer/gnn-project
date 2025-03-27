@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[[source]]
+url = "https://download.pytorch.org/whl/cpu/"
+verify_ssl = true
+name = "pytorch_cpu"
+
+[[source]]
+url = "https://download.pytorch.org/whl/cu126/"
+verify_ssl = true
+name = "pytorch_cu126"
+
+[packages]
+h5py = "*"
+numpy = "*"
+scikit-learn = "*"
+tensorflow = "*"
+matplotlib = "*"
+mne = "*"
+scipy = "*"
+sbi = "*"
+torch = {version = "*", index = "pytorch_cpu", markers = "sys_platform == 'darwin'"}
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"
