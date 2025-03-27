@@ -314,7 +314,7 @@ def preprocess_subject(subject_folder, raw_root="./data/raw/", output_root="./da
     save_preprocessed_epochs(epochs_normalized, subject_folder, output_root=output_root)
 
 
-def process_all_subjects(raw_root="./../data/raw/", output_root="./../data/preprocessed/"):
+def process_all_subjects(raw_root="./data/raw/", output_root="./../data/preprocessed/"):
     """
     Loop over all subject folders in the raw directory and preprocess them.
     """
