@@ -61,7 +61,7 @@ for folder in os.listdir(main_directory):
                                 print(f"Saved preprocessed cnt data to {new_cnt_file_path}")
                             else:
                                 print(f"Error: 'EEG' key not found in 'cnt' group in {mat_file_path}.")
-                        
+
                         if 'mrk' in mat:
                             mrk_group = mat['mrk']
                             print(f"Available keys in 'mrk' group: {list(mrk_group.keys())}")
