@@ -8,11 +8,6 @@ url = "https://download.pytorch.org/whl/cpu/"
 verify_ssl = true
 name = "pytorch_cpu"
 
-[[source]]
-url = "https://download.pytorch.org/whl/cu126/"
-verify_ssl = true
-name = "pytorch_cu126"
-
 [packages]
 h5py = "*"
 numpy = "*"
@@ -22,7 +17,8 @@ matplotlib = "*"
 mne = "*"
 scipy = "*"
 sbi = "*"
-torch = {version = "*", index = "pytorch_cpu", markers = "sys_platform == 'darwin'"}
+seaborn = "*"
+tqdm = "*"
 
 [dev-packages]
 
