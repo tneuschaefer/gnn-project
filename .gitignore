@@ -166,3 +166,6 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Conda environment.yml, the pipfile is the recommended way to specify dependencies, you can create a conda environment from the requirements.txt file exported by pipenv
+environment.yml
