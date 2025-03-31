@@ -29,7 +29,7 @@ def train_forward_model(
     return model
 
 
-def optimize_forward_hyper(data_loader, device=torch.device("cpu")):
+def optimize_forward_hyper(data_loader, fixed_params, device=torch.device("cpu")):
     """Optimize hyperparameters for the forward model using grid search"""
 
     best_params = None
@@ -41,7 +41,12 @@ def optimize_forward_hyper(data_loader, device=torch.device("cpu")):
     )  # hidden_sizes, dropout, lr
 
     for hidden_sizes, dropout, lr in param_grid:
-        model = ForwardModel(hidden_sizes=hidden_sizes, dropout=dropout).to(device)
+        print(
+            f"Training with hidden_sizes: {hidden_sizes}, dropout: {dropout}, learning rate: {lr}"
+        )
+        model = ForwardModel(
+            **fixed_params, hidden_sizes=hidden_sizes, dropout=dropout
+        ).to(device)
         trained_model = train_forward_model(
             model, data_loader, num_epochs=10, lr=lr, device=device
         )

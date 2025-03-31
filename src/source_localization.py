@@ -124,11 +124,13 @@ def main():
         if args.optimize_params:
             print("Optimizing forward model hyperparameters...")
             # parameter grid for optimization can be adjusted in optimize_forward_hyper()
-            best_params = optimize_forward_hyper(data_loader, device=device)
-            hidden_sizes, dropout, lr = best_params
+            hidden_sizes, dropout, lr = optimize_forward_hyper(
+                data_loader, fixed_params=forward_params, device=device
+            )
             forward_params.update({"hidden_sizes": hidden_sizes, "dropout": dropout})
 
         # Instantiate and train forward model
+        print(f"Using hyperparemeters: {forward_params}")
         model_forward = ForwardModel(**forward_params).to(device)
         model_forward = train_forward_model(
             model_forward, data_loader, num_epochs=50, lr=lr, device=device
@@ -155,7 +157,7 @@ def main():
     if args.train or not os.path.exists(posterior_path):
         print("Training SBI posterior estimator...")
 
-        sbi_params = {"num_simulations": 10000, "density_estimator": "maf"}
+        sbi_params = {"num_simulations": 5000, "density_estimator": "maf"}
 
         # Optimize hyperparameters if argument is set
         if args.optimize_params:
@@ -168,10 +170,15 @@ def main():
             test_loader = DataLoader(test_dataset, batch_size=32, shuffle=False)
 
             # parameter grid for optimization can be adjusted in optimize_sbi_hyperparams()
-            best_params = optimize_sbi_hyperparams(
+            num_simulations, density_estimator = optimize_sbi_hyperparams(
                 model_forward, train_loader, test_loader, device=device
             )
-            sbi_params = best_params
+            sbi_params.update(
+                {
+                    "num_simulations": num_simulations,
+                    "density_estimator": density_estimator,
+                }
+            )
 
         # Train the SBI posterior estimator
         posterior_model = train_sbi_posterior(

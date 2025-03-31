@@ -9,7 +9,7 @@ from models.sbi_posterior import SBIPosterior
 def train_sbi_posterior(
     model_forward,
     data_loader,
-    num_simulations=10000,
+    num_simulations=5000,
     density_estimator="maf",
     device=torch.device("cpu"),
 ):
@@ -34,7 +34,6 @@ def train_sbi_posterior(
         density_estimator=density_estimator,
         device=device,
         show_progress_bars=True,
-        logging_level="WARNING",
     )
 
     # Generate training data

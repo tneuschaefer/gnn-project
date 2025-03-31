@@ -1,0 +1,2 @@
+Dipole Localization Error: 1.9349
+Hamming Distance: 0.4398

@@ -3,7 +3,7 @@ import torch.nn as nn
 
 class ForwardModel(nn.Module):
     def __init__(
-        self, n_sources=3, n_electrodes=64, hidden_sizes=[32, 64], dropout=0.1
+        self, n_sources=3, n_electrodes=60, hidden_sizes=[64, 128], dropout=0.1
     ):
         """
         Forward model mapping from source space to EEG space
